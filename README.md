@@ -19,6 +19,11 @@ A modern, full-featured web platform for managing equipment rental companies —
 
 </div>
 
+<p align="center">
+    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1400&q=80"
+         alt="EquipFlow — heavy equipment at a construction site" width="100%">
+</p>
+
 ---
 
 ## ✨ Highlights
