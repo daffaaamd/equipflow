@@ -1,58 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🚜 EquipFlow
 
-## About Laravel
+**Heavy Equipment Rental & Fleet Management Platform**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A modern, full-featured web platform for managing equipment rental companies — from the public catalog and quote requests to fleet monitoring, contracts, invoicing, and analytics.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Live Demo → [equipflow-chi.vercel.app](https://equipflow-chi.vercel.app)**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<br/>
 
-## Learning Laravel
+![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Alpine.js](https://img.shields.io/badge/Alpine.js-3-77C1D8?style=for-the-badge&logo=alpine.js&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+</div>
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## ✨ Highlights
 
-## Agentic Development
+- **Public website** — landing page, equipment catalog with live filters (category, brand, location, capacity, status), detailed equipment pages with gallery & specs, and a request-a-quote flow.
+- **Role-based portals** — separate dashboards for `admin`, `sales`, `operations`, `maintenance`, `finance`, and `customer` with permission-gated routes.
+- **Full rental workflow** — rental requests → quotations → contracts → deliveries → invoices → payments, all tracked end-to-end.
+- **Fleet management** — equipment CRUD, status tracking (available / rented / maintenance), operators with certifications, and maintenance history.
+- **Analytics & reports** — revenue trends, rental activity, equipment utilization, customer growth, finance dashboards with Chart.js visualizations, plus exportable reports.
+- **Operations** — live fleet monitoring, project tracking, delivery scheduling, notifications, and a full audit log.
+- **Responsive design** — mobile-friendly UI built with Tailwind CSS and Alpine.js.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
+
+## 👥 Demo Accounts
+
+All demo accounts use password **`password`**.
+
+| Role        | Email                     | Access                         |
+|-------------|---------------------------|--------------------------------|
+| Admin       | `admin@equipflow.com`     | Full access to everything      |
+| Sales       | `sales@equipflow.com`     | Quotes, contracts, customers   |
+| Operations  | `operations@equipflow.com`| Fleet, deliveries, monitoring  |
+| Maintenance | `maintenance@equipflow.com`| Service records & scheduling   |
+| Finance     | `finance@equipflow.com`   | Invoices, payments, finance    |
+| Customer    | `customer@equipflow.com`  | Customer portal                |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer      | Technology                                                        |
+|------------|-------------------------------------------------------------------|
+| Backend    | PHP 8.3, Laravel 13                                                |
+| Frontend   | Tailwind CSS v4, Alpine.js 3, Chart.js                             |
+| Build tool | Vite + Laravel Vite Plugin                                         |
+| Database   | MySQL (local) · SQLite (Vercel serverless)                         |
+| Hosting    | Vercel (`vercel-php` runtime) + GitHub                             |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- PHP ≥ 8.3
+- Composer
+- Node.js ≥ 20.19
+- MySQL (or SQLite for a zero-setup start)
+
+### Local development
 
 ```bash
-composer require laravel/boost --dev
+# 1. Install dependencies
+composer install
+npm install
 
-php artisan boost:install
+# 2. Environment setup
+cp .env.example .env
+php artisan key:generate
+
+# 3. Configure database in .env (defaults to SQLite below)
+# DB_CONNECTION=sqlite
+# DB_DATABASE=database/database.sqlite
+
+# 4. Run migrations & seed demo data
+php artisan migrate --seed
+
+# 5. Build frontend assets
+npm run build
+
+# 6. Start the dev server
+php artisan dev
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Then open `http://127.0.0.1:8000` (or the URL printed by the dev server).
 
-## Contributing
+> 💡 Demo accounts are created by `UserSeeder` — see the table above.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## ☁️ Deploying to Vercel
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+This project ships with everything needed to deploy on Vercel's free tier:
 
-## Security Vulnerabilities
+1. Push this repository to GitHub.
+2. Import the repository in [Vercel](https://vercel.com/new) (framework preset: **Other**).
+3. Build command: `npm run build` · Output directory: `dist`
+4. Vercel uses the `vercel-php` runtime via [`api/index.php`](api/index.php) and serves the pre-seeded SQLite database automatically.
+5. Set your production `APP_KEY` in the Vercel project environment variables.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Key files:
 
-## License
+```
+vercel.json     → serverless config, env vars, catch-all route to api/index.php
+api/index.php   → PHP bridge for the serverless runtime (tmp dirs, sqlite, Laravel)
+build-dist.js   → builds Vite assets & prepares the dist/ output
+.vercelignore   → keeps build/cache artifacts out of the deployment
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> The analytics queries are written **driver-agnostic** (`DATE_FORMAT` on MySQL / `strftime` on SQLite) so the app runs identically in both environments.
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+├── Http/Controllers/     → Public, Auth, and admin/customer portal controllers
+├── Models/               → Eloquent models (Equipment, Contract, Invoice, Payment, …)
+└── Services/
+    └── AnalyticsService.php  → driver-agnostic analytics & trend computation
+resources/
+└── views/
+    ├── components/       → Layouts, badges, cards, empty states
+    └── pages/            → landing pages, auth, and dashboard views
+routes/web.php            → public, portal, and management route groups
+database/seeders/         → demo data (users, fleet, customers, projects, rentals)
+```
+
+---
+
+## 🗺 Roadmap Ideas
+
+- [ ] Email notifications & PDF export for invoices/quotations
+- [ ] Realtime fleet tracking integration
+- [ ] Multi-company / multi-branch support
+- [ ] API endpoints with Laravel Sanctum
+
+---
+
+## 📄 License
+
+This is a portfolio project built with [Laravel](https://laravel.com) (MIT license).
+
+<div align="center">
+
+**Built with ❤️ by Daffa Ahmad Baihaqi**
+
+</div>
