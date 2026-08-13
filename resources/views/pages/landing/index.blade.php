@@ -22,18 +22,18 @@
                     <span class="h-px w-10 bg-brand-500"></span>
                     Heavy Equipment Rental &amp; Fleet Management
                 </p>
-                <h1 class="reveal mt-6 font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                <h1 class="reveal mt-6 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
                     Power Your Project.<br>
                     <span class="text-brand-500">We Move the Earth.</span>
                 </h1>
-                <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-charcoal-200" style="transition-delay:.1s">
+                <p class="reveal mt-6 max-w-xl text-base leading-relaxed text-charcoal-200 sm:text-lg" style="transition-delay:.1s">
                     A modern fleet of excavators, dozers, cranes, and haul trucks — ready to deploy across
                     construction, mining, infrastructure, and industrial sites. Transparent pricing, guaranteed
                     availability, and certified operators.
                 </p>
-                <div class="reveal mt-9 flex flex-wrap items-center gap-4" style="transition-delay:.2s">
-                    <a href="{{ route('catalog') }}" class="btn-brand btn-lg">Browse the Fleet</a>
-                    <a href="{{ route('quote.create') }}" class="btn-lg border border-white/30 text-white hover:border-brand-500 hover:bg-brand-500">Request a Quote</a>
+                <div class="reveal mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4" style="transition-delay:.2s">
+                    <a href="{{ route('catalog') }}" class="btn-brand btn-lg w-full justify-center sm:w-auto">Browse the Fleet</a>
+                    <a href="{{ route('quote.create') }}" class="btn-lg w-full justify-center border border-white/30 text-white hover:border-brand-500 hover:bg-brand-500 sm:w-auto">Request a Quote</a>
                 </div>
             </div>
 
@@ -77,8 +77,8 @@
                         <img src="{{ $cat->url }}" onerror="this.onerror=null;this.src='/img/placeholder.svg'"
                              alt="{{ $cat->name }}" class="h-48 w-full object-cover opacity-60 transition-opacity group-hover:opacity-40 sm:h-56">
                         <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent"></div>
-                        <div class="absolute inset-x-0 bottom-0 p-5">
-                            <h3 class="font-display text-2xl font-bold uppercase tracking-wide text-white">{{ $cat->name }}</h3>
+                        <div class="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                            <h3 class="font-display text-xl font-bold uppercase tracking-wide text-white sm:text-2xl">{{ $cat->name }}</h3>
                             <p class="mt-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-400">
                                 {{ $cat->equipment_count }} unit{{ $cat->equipment_count == 1 ? '' : 's' }}
                                 <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -128,7 +128,7 @@
                                 <svg class="h-4 w-4 text-charcoal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.14-7.5 11.25-7.5 11.25S4.5 17.64 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
                                 {{ $eq->current_location ?? 'Jakarta, Indonesia' }}
                             </p>
-                            <div class="mt-4 flex items-end justify-between border-t border-charcoal-200 pt-4">
+                            <div class="mt-4 flex flex-col items-start gap-3 border-t border-charcoal-200 pt-4 sm:flex-row sm:items-end sm:justify-between">
                                 <div>
                                     <p class="text-xs font-semibold uppercase tracking-widest text-charcoal-500">From</p>
                                     <p class="font-display text-2xl font-bold text-brand-600">IDR {{ number_format($eq->daily_rate) }}<span class="text-sm text-charcoal-500">/day</span></p>

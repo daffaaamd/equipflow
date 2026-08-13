@@ -61,7 +61,7 @@
                     <p class="mt-1 text-lg font-semibold text-charcoal-600">{{ $equipment->brand }} {{ $equipment->model }} ({{ $equipment->year }})</p>
 
                     <div class="mt-6 border border-charcoal-200 bg-white p-6">
-                        <div class="flex items-end justify-between">
+                        <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between">
                             <div>
                                 <p class="text-xs font-semibold uppercase tracking-widest text-charcoal-500">Daily Rate</p>
                                 <p class="font-display text-4xl font-bold text-brand-600">IDR {{ number_format($equipment->daily_rate) }}</p>
@@ -191,7 +191,7 @@
             {{-- Similar --}}
             @if ($similar->isNotEmpty())
                 <div class="reveal mt-14">
-                    <div class="flex items-end justify-between">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
                         <h2 class="font-display text-3xl font-bold uppercase tracking-tight text-navy-900">Similar Equipment</h2>
                         <a href="{{ route('catalog') }}" class="btn-outline-navy btn-md">View All</a>
                     </div>

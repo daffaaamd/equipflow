@@ -57,7 +57,7 @@
                         <label for="password" class="label !text-charcoal-300">Password</label>
                         <input type="password" name="password" id="password" class="input !border-navy-700 !bg-navy-900 !text-white placeholder:!text-charcoal-500" placeholder="••••••••" required>
                     </div>
-                    <div class="flex items-center justify-between">
+                    <div class="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <label class="flex items-center gap-2 text-sm text-charcoal-300">
                             <input type="checkbox" name="remember" value="1" class="h-4 w-4 rounded-sm accent-brand-500">
                             Remember me

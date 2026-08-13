@@ -120,7 +120,7 @@
                                         <span class="flex items-center gap-1"><svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.14-7.5 11.25-7.5 11.25S4.5 17.64 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>{{ $eq->current_location ?? '-' }}</span>
                                         <span class="flex items-center gap-1"><svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>{{ number_format($eq->operating_hours, 0) }} hrs</span>
                                     </div>
-                                    <div class="mt-4 flex items-end justify-between border-t border-charcoal-200 pt-4">
+                                    <div class="mt-4 flex flex-col items-start gap-3 border-t border-charcoal-200 pt-4 sm:flex-row sm:items-end sm:justify-between">
                                         <div>
                                             <p class="text-[11px] font-semibold uppercase tracking-widest text-charcoal-400">Daily Rate</p>
                                             <p class="font-display text-xl font-bold text-brand-600">IDR {{ number_format($eq->daily_rate) }}</p>
