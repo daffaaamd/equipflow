@@ -14,6 +14,7 @@ use App\Models\Quotation;
 use App\Models\RentalRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class AnalyticsService
 {
@@ -53,6 +54,16 @@ class AnalyticsService
         }
 
         return $months;
+    }
+
+    /**
+     * Build a driver-agnostic "YYYY-MM" expression for the given date column.
+     */
+    private function monthExpr(string $column): string
+    {
+        return DB::connection()->getDriverName() === 'sqlite'
+            ? "strftime('%Y-%m', $column)"
+            : "DATE_FORMAT($column, '%Y-%m')";
     }
 
     private function equipmentQuery()
@@ -142,7 +153,7 @@ class AnalyticsService
 
     public function revenueTrend(int $months = 12): array
     {
-        $data = Payment::selectRaw('DATE_FORMAT(payment_date, "%Y-%m") as ym, SUM(amount) as total')
+        $data = Payment::selectRaw($this->monthExpr('payment_date').' as ym, SUM(amount) as total')
             ->whereBetween('payment_date', [$this->from, $this->to])
             ->groupBy('ym')->get()->pluck('total', 'ym');
 
@@ -171,11 +182,11 @@ class AnalyticsService
 
     public function rentalActivity(int $months = 12): array
     {
-        $requests = RentalRequest::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as ym, COUNT(*) as c')
+        $requests = RentalRequest::selectRaw($this->monthExpr('created_at').' as ym, COUNT(*) as c')
             ->whereBetween('created_at', [$this->from, $this->to])->groupBy('ym')->pluck('c', 'ym');
-        $quotations = Quotation::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as ym, COUNT(*) as c')
+        $quotations = Quotation::selectRaw($this->monthExpr('created_at').' as ym, COUNT(*) as c')
             ->whereBetween('created_at', [$this->from, $this->to])->groupBy('ym')->pluck('c', 'ym');
-        $contracts = Contract::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as ym, COUNT(*) as c')
+        $contracts = Contract::selectRaw($this->monthExpr('created_at').' as ym, COUNT(*) as c')
             ->whereBetween('created_at', [$this->from, $this->to])->groupBy('ym')->pluck('c', 'ym');
 
         $out = ['labels' => [], 'requests' => [], 'quotations' => [], 'contracts' => []];
@@ -261,7 +272,7 @@ class AnalyticsService
 
     public function maintenanceCostTrend(int $months = 12): array
     {
-        $data = MaintenanceRecord::selectRaw('DATE_FORMAT(date, "%Y-%m") as ym, SUM(cost) as total')
+        $data = MaintenanceRecord::selectRaw($this->monthExpr('date').' as ym, SUM(cost) as total')
             ->where('status', 'completed')
             ->whereBetween('date', [$this->from, $this->to])
             ->groupBy('ym')->pluck('total', 'ym');
@@ -278,7 +289,7 @@ class AnalyticsService
 
     public function equipmentUtilizationTrend(int $months = 12): array
     {
-        $data = EquipmentUtilization::selectRaw('DATE_FORMAT(date, "%Y-%m") as ym, COUNT(*) as total, SUM(status = "rented") as rented')
+        $data = EquipmentUtilization::selectRaw($this->monthExpr('date').' as ym, COUNT(*) as total, SUM(status = "rented") as rented')
             ->whereBetween('date', [$this->from, $this->to])
             ->groupBy('ym')->get()->keyBy('ym');
 
@@ -325,7 +336,7 @@ class AnalyticsService
 
     public function customerGrowth(int $months = 12): array
     {
-        $data = Customer::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as ym, COUNT(*) as c')
+        $data = Customer::selectRaw($this->monthExpr('created_at').' as ym, COUNT(*) as c')
             ->whereBetween('created_at', [$this->from, $this->to])
             ->groupBy('ym')->pluck('c', 'ym');
 
