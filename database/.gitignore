@@ -1,1 +1,3 @@
-*.sqlite*
+# Ignore temporary sqlite files except database.sqlite
+*.sqlite-journal
+*.sqlite3

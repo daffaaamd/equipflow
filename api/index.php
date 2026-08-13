@@ -42,11 +42,28 @@ putenv('LOG_CHANNEL=stderr');
 $_ENV['LOG_CHANNEL'] = 'stderr';
 
 // 3. Ensure pre-seeded SQLite database is copied to /tmp
-$sqliteSource = __DIR__ . '/../database/database.sqlite';
 $sqliteDest = '/tmp/database.sqlite';
+$possibleSources = [
+    __DIR__ . '/../database/database.sqlite',
+    __DIR__ . '/../dist/database.sqlite',
+    __DIR__ . '/../public/database.sqlite',
+    dirname(__DIR__) . '/database/database.sqlite',
+    ($_SERVER['DOCUMENT_ROOT'] ?? '') . '/../database/database.sqlite',
+    ($_SERVER['DOCUMENT_ROOT'] ?? '') . '/database/database.sqlite',
+];
 
-if (!file_exists($sqliteDest) && file_exists($sqliteSource)) {
-    @copy($sqliteSource, $sqliteDest);
+if (!file_exists($sqliteDest) || filesize($sqliteDest) === 0) {
+    foreach ($possibleSources as $src) {
+        if (!empty($src) && file_exists($src) && filesize($src) > 0) {
+            @copy($src, $sqliteDest);
+            break;
+        }
+    }
+}
+
+// If still missing, create an empty sqlite database so it doesn't crash
+if (!file_exists($sqliteDest)) {
+    @touch($sqliteDest);
 }
 
 putenv('DB_CONNECTION=sqlite');
