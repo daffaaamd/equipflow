@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 // Vercel Serverless Function Bridge for Laravel 11/12
 
 // 1. Ensure /tmp writable directories exist for Laravel
@@ -19,6 +23,9 @@ foreach ($storageDirs as $dir) {
 }
 
 // 2. Set serverless environment variables
+putenv('APP_DEBUG=true');
+$_ENV['APP_DEBUG'] = 'true';
+
 putenv('APP_STORAGE=/tmp/storage');
 $_ENV['APP_STORAGE'] = '/tmp/storage';
 
@@ -42,14 +49,11 @@ if (!file_exists($sqliteDest) && file_exists($sqliteSource)) {
     @copy($sqliteSource, $sqliteDest);
 }
 
-// Only override DB to sqlite if not explicitly connecting to an external MySQL host
-if (empty($_ENV['DB_HOST']) || $_ENV['DB_HOST'] === '127.0.0.1') {
-    putenv('DB_CONNECTION=sqlite');
-    $_ENV['DB_CONNECTION'] = 'sqlite';
+putenv('DB_CONNECTION=sqlite');
+$_ENV['DB_CONNECTION'] = 'sqlite';
 
-    putenv('DB_DATABASE=' . $sqliteDest);
-    $_ENV['DB_DATABASE'] = $sqliteDest;
-}
+putenv('DB_DATABASE=' . $sqliteDest);
+$_ENV['DB_DATABASE'] = $sqliteDest;
 
 // 4. Forward request to Laravel standard public/index.php
 require __DIR__ . '/../public/index.php';

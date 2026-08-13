@@ -31,7 +31,7 @@
     "APP_NAME": "EquipFlow",
     "APP_ENV": "production",
     "APP_KEY": "base64:dx55N7F8IiK7FaMwWHesJOEHCRxHmlzkqhPGo/aA6nA=",
-    "APP_DEBUG": "false",
+    "APP_DEBUG": "true",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
