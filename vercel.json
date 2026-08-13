@@ -28,14 +28,16 @@
     }
   ],
   "env": {
+    "APP_NAME": "EquipFlow",
     "APP_ENV": "production",
+    "APP_KEY": "base64:dx55N7F8IiK7FaMwWHesJOEHCRxHmlzkqhPGo/aA6nA=",
     "APP_DEBUG": "false",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
     "APP_ROUTES_CACHE": "/tmp/routes.php",
     "APP_SERVICES_CACHE": "/tmp/services.php",
-    "VIEW_COMPILED_PATH": "/tmp",
+    "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "CACHE_STORE": "array",
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "cookie",

@@ -21,5 +21,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
-        );
     })->create();
+
+if (isset($_ENV['APP_STORAGE']) || getenv('APP_STORAGE')) {
+    $app->useStoragePath(getenv('APP_STORAGE') ?: $_ENV['APP_STORAGE']);
+}
+
+return $app;
