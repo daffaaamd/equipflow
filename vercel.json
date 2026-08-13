@@ -14,6 +14,7 @@
   "env": {
     "APP_NAME": "EquipFlow",
     "APP_ENV": "production",
+    "APP_URL": "https://equipflow-chi.vercel.app",
     "APP_KEY": "base64:dx55N7F8IiK7FaMwWHesJOEHCRxHmlzkqhPGo/aA6nA=",
     "APP_DEBUG": "false",
     "APP_CONFIG_CACHE": "/tmp/config.php",
