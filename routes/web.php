@@ -251,9 +251,60 @@ Route::get('/dashboard', function () {
 | Static Asset Fallback (ensures images serve in all environments)
 |--------------------------------------------------------------------------
 */
+Route::get('/build/{path}', function ($path) {
+    $possibleFiles = [
+        public_path('build/' . $path),
+        base_path('dist/build/' . $path),
+        base_path('public/build/' . $path),
+    ];
+
+    $file = null;
+    foreach ($possibleFiles as $f) {
+        if (file_exists($f) && !is_dir($f)) {
+            $file = $f;
+            break;
+        }
+    }
+
+    if (!$file) {
+        abort(404);
+    }
+
+    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+    $mimes = [
+        'css'   => 'text/css; charset=utf-8',
+        'js'    => 'application/javascript; charset=utf-8',
+        'json'  => 'application/json',
+        'woff'  => 'font/woff',
+        'woff2' => 'font/woff2',
+        'ttf'   => 'font/ttf',
+        'svg'   => 'image/svg+xml',
+    ];
+
+    $mime = $mimes[$ext] ?? mime_content_type($file) ?: 'application/octet-stream';
+
+    return response()->file($file, [
+        'Content-Type' => $mime,
+        'Cache-Control' => 'public, max-age=31536000, immutable',
+    ]);
+})->where('path', '.*');
+
 Route::get('/img/{path}', function ($path) {
-    $file = public_path('img/' . $path);
-    if (!file_exists($file) || is_dir($file)) {
+    $possibleFiles = [
+        public_path('img/' . $path),
+        base_path('dist/img/' . $path),
+        base_path('public/img/' . $path),
+    ];
+
+    $file = null;
+    foreach ($possibleFiles as $f) {
+        if (file_exists($f) && !is_dir($f)) {
+            $file = $f;
+            break;
+        }
+    }
+
+    if (!$file) {
         abort(404);
     }
 
@@ -277,14 +328,28 @@ Route::get('/img/{path}', function ($path) {
 })->where('path', '.*');
 
 Route::get('/js/{path}', function ($path) {
-    $file = public_path('js/' . $path);
-    if (!file_exists($file) || is_dir($file)) {
+    $possibleFiles = [
+        public_path('js/' . $path),
+        base_path('dist/js/' . $path),
+        base_path('public/js/' . $path),
+    ];
+
+    $file = null;
+    foreach ($possibleFiles as $f) {
+        if (file_exists($f) && !is_dir($f)) {
+            $file = $f;
+            break;
+        }
+    }
+
+    if (!$file) {
         abort(404);
     }
 
     return response()->file($file, [
-        'Content-Type' => 'application/javascript',
+        'Content-Type' => 'application/javascript; charset=utf-8',
         'Cache-Control' => 'public, max-age=86400',
     ]);
 })->where('path', '.*');
+
 

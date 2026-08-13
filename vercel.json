@@ -7,22 +7,6 @@
   },
   "routes": [
     {
-      "src": "/build/(.*)",
-      "dest": "/public/build/$1"
-    },
-    {
-      "src": "/img/(.*)",
-      "dest": "/public/img/$1"
-    },
-    {
-      "src": "/js/(.*)",
-      "dest": "/public/js/$1"
-    },
-    {
-      "src": "/(favicon.ico|robots.txt)",
-      "dest": "/public/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
@@ -31,7 +15,7 @@
     "APP_NAME": "EquipFlow",
     "APP_ENV": "production",
     "APP_KEY": "base64:dx55N7F8IiK7FaMwWHesJOEHCRxHmlzkqhPGo/aA6nA=",
-    "APP_DEBUG": "true",
+    "APP_DEBUG": "false",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
