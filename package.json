@@ -3,7 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build && node -e \"import('fs').then(fs => { if (!fs.existsSync('dist')) fs.mkdirSync('dist', { recursive: true }); fs.writeFileSync('dist/index.html', '<!DOCTYPE html><html><body></body></html>'); })\"",
+        "build": "node build-dist.js",
         "dev": "vite"
     },
     "devDependencies": {
